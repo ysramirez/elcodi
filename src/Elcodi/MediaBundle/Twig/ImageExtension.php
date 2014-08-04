@@ -87,8 +87,12 @@ class ImageExtension extends Twig_Extension
      *
      * @return string image route
      */
-    public function resize(ImageInterface $imageMedia, $options)
+    public function resize(ImageInterface $imageMedia = null, $options)
     {
+        if ($imageMedia == null){
+            throw new \Exception("There is not image to resize");
+        }
+        
         return $this
             ->router
             ->generate($this->imageResizeControllerRouteName, array(
